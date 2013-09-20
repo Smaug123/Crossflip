@@ -1,0 +1,25 @@
+A is n by m binary matrix
+i := 1 // row and column index
+for i := 1 to m do // for every column 
+// find non-zero element in column i, starting in row i:
+  maxi := i 
+  for k := i to n do 
+    if A[k,i] = 1 then 
+      maxi := k 
+  end for
+  if A[maxi,i] = 1 then 
+    swap rows i and maxi in A and b, but do not change the value of i 
+    //Now A[i,i] will contain the old value of A[maxi,i], that is 1
+    for u := i+1 to m do 
+      Add A[u,i] * row i to row u, do this for BOTH, matrix A and RHS vector b
+      //Now A[u,i] will be 0
+    end for
+  else 
+    declare error – more than one solution exist
+  end if
+end for 
+if n>m and if you can find zero row in A with nonzero RHS element, then
+  declare error – no solution.
+end if 
+// now, matrix A is in upper triangular form and solution can be found
+use back substitution to find vector x
